@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Teacher Details</title>
+</head>
+<body>
+<a th:href="@{/}">HOME</a>
+
+<h1>Teacher Details</h1>
+<p><strong>ID:</strong> <span th:text="${teacher.id}"></span></p>
+<p><strong>First name:</strong> <span th:text="${teacher.firstName}"></span></p>
+<p><strong>Last name:</strong> <span th:text="${teacher.lastName}"></span></p>
+<p><strong>Email:</strong> <span th:text="${teacher.email}"></span></p>
+<a th:href="@{/teachers/{id}/edit(id=${teacher.id})}">Edit</a> |
+<a th:href="@{/teachers/{id}/delete(id=${teacher.id})}"
+   onclick="return confirm('Are you sure you want to delete this teacher?');">Delete</a> |
+<a th:href="@{/teachers}">Back to List</a>
+</body>
+</html>

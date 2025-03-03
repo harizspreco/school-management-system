@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Classroom Details</title>
+</head>
+<body>
+<a th:href="@{/}">HOME</a>
+
+<h1>Classroom Details</h1>
+<p><strong>Name:</strong> <span th:text="${classroom.name}">III-1</span></p>
+<p><strong>Teacher:</strong>
+    <span th:if="${classroom.teacher != null}"
+          th:text="${classroom.teacher.firstName + ' ' + classroom.teacher.lastName}">John Doe</span>
+    <span th:if="${classroom.teacher == null}">Not assigned</span>
+</p>
+
+<h2>Students in this Class</h2>
+<ul th:if="${not #lists.isEmpty(classroom.students)}">
+    <li th:each="student : ${classroom.students}">
+        <a th:href="@{/students/{id}(id=${student.id})}"
+           th:text="${student.firstName + ' ' + student.lastName}">Jane Smith</a>
+    </li>
+</ul>
+<p th:if="${#lists.isEmpty(classroom.students)}">No students in this class</p>
+
+<a th:href="@{/classrooms/{id}/edit(id=${classroom.id})}">Edit</a> |
+<a th:href="@{/classrooms}">Back to List</a>
+</body>
+</html>

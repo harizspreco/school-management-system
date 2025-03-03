@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Details</title>
+</head>
+<body>
+<a th:href="@{/}">HOME</a>
+
+<h1>Student Details</h1>
+<p><strong>Name:</strong> <span th:text="${student.firstName + ' ' + student.lastName}"></span></p>
+<p><strong>Classroom:</strong> <span th:text="${student.classroom.name}"></span></p>
+
+<h2>Subjects and Grades</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Subject</th>
+        <th>Grades</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sg : ${subjectGrades}">
+        <td th:text="${sg.name}">Subject</td>
+        <td>
+            <ul>
+                <li th:each="grade : ${sg.grades}" th:text="${grade}">Grade</li>
+                <li th:if="${#lists.isEmpty(sg.grades)}">No grades</li>
+            </ul>
+        </td>
+        <td>
+            <!-- Forma za dodavanje ocjene za ovaj predmet -->
+            <form th:action="@{/grades/add}" method="post">
+                <input type="hidden" name="studentId" th:value="${student.id}" />
+                <input type="hidden" name="subjectName" th:value="${sg.name}" />
+
+                <label for="gradeValue">New Grade:</label>
+                <input type="number" name="gradeValue" id="gradeValue" required min="1" max="5" />
+
+                <button type="submit">Add Grade</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
