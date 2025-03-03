@@ -32,4 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 
+src/test/java/com/harizspreco/school_management_system/SchoolManagementSystemApplicationTests.java
+
 src/main/resources/application.properties
