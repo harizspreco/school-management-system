@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@ToString(exclude = {"password", "classroom", "grades"})
+@ToString(exclude = {"classroom", "grades"})
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +35,10 @@ public class Student {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Grade> grades = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private User user;
 
     public Student(String firstName, String lastName, Classroom classroom) {
         this.firstName = firstName;
